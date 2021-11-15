@@ -5,20 +5,27 @@
 using namespace std;
 
 //Funcion que guarda el contador del inicio y lo verifica
-int saveCount(int count) {
+int saveCount(int counter) {
 	do {
-		cin >> count;
-	}while (count <=0);
+		cin >> counter;
+	}while (counter <=0);
 
-	return count;
+	return counter;
 }
 
-void addNicknamesToList(Lista<string> *listNickname, int count) {
+void addNicknamesToList(Lista<string> *listNickname, Lista<string> *listNickname2, int counter) {
 	string nickname;
+	char temporal;
 
 	cout << "\nEscribe el nombre y apodo: " << endl;
-	getline(cin, nickname);
-	listNickname->insertar(nickname, count);
+	// getline(cin, nickname);
+	while(cin >> nickname && cin.get(temp) && temp != '\n'){
+		if(counter % 2 == 0) {
+			listNickname->insertar(nickname, counter);
+		} else {
+			listNickname->insertar(nickname, counter);
+		}
+	}
 }
 
 //Funcion para mostrar la lista
@@ -34,12 +41,13 @@ void showList(Lista<string> *listNickname) {
 //Funcion para revisar la checklist (Funcion secundaria, despues del main)
 void checkList(int childrenCount, int wordsForLine) {
 	Lista<string> *listNickname = new Lista<string>;
+	Lista<string> *listNickname2 = new Lista<string>;
 	string nickname;
 
-	int count = 0;
-	while(count <= childrenCount) {
-		count++;
-		addNicknamesToList(listNickname, count);
+	int counter = 0;
+	while(counter <= childrenCount) {
+		counter++;
+		addNicknamesToList(listNickname, listNickname2, counter);
 	}
 
 	showList(listNickname);
@@ -48,6 +56,7 @@ void checkList(int childrenCount, int wordsForLine) {
 
 int main() {
 	int childrenCount, wordsForLine;
+	string words;
 
 	cout << "/************************************************/" << endl;
 	cout << "/*** Esta es la lista para los niños de santa ***/" << endl;
@@ -56,11 +65,12 @@ int main() {
 	cout << "Ingrese la cantidad de niños a colocar en la lista: ";
 	childrenCount = saveCount(childrenCount);
 
-	cout << "Ingrese la cantidad de nombres por linea: ";
-	wordsForLine = saveCount(wordsForLine);
+	// cout << "Ingrese la cantidad de nombres por linea: ";
+	// wordsForLine = saveCount(wordsForLine);
 
-	cout << "\nEscribe " << wordsForLine << " nombres por linea. \n" << endl;
+	// cout << "\nEscribe " << wordsForLine << " nombres por linea. \n" << endl;
 	checkList(childrenCount, wordsForLine);
+
 
 	return 0;
 }
